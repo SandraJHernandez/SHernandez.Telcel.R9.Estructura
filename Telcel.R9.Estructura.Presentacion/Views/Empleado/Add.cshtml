@@ -1,0 +1,52 @@
+﻿@model Telcel.R9.Estructura.Negocio.Empleado
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Empleado</h2>
+            <p>Ingresa los datos correspondientes para agregar un usuario</p>
+        </div>
+    </div>
+    <br />
+    <hr />
+    @using (Html.BeginForm("Add", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+                @Html.LabelFor(model => model.EmpleadoID, new { @class = "control-label col-md-2 visually-hidden" })
+                @Html.TextBoxFor(model => model.EmpleadoID, new{@class="form-control visually hiden"})
+                @Html.ValidationMessageFor(model => model.EmpleadoID)
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Nombre, new{@class="control-label com-md-2"})
+                @Html.TextBoxFor(model => model.Nombre, new{@class="form-control"})
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+            <div class="col-md-3">
+                 @Html.LabelFor(model => model.Puesto, new{@class="control-label col-md-2"})
+                 @Html.DropDownListFor(model => model.Puesto.PuestoID, new SelectList(Model.Puesto.Puestos, "PuestoID", "Descripcion"), "Selecciona una opcion", new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.Puesto.PuestoID)
+            </div>
+             <div class="col-md-3">
+                 @Html.LabelFor(model => model.Departamento, new{@class="control-label col-md-2"})
+                 @Html.DropDownListFor(model => model.Departamento.DepartamentoID, new SelectList(Model.Departamento.Departamentos, "DepartamentoID", "Descripcion"), "Selecciona una opcion", new { @class = "form-control" })
+                 @Html.ValidationMessageFor(model => model.Departamento.DepartamentoID)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+            <input type="submit" value="Agregar" class="btn btn-success" />
+
+             @Html.ActionLink("Regresar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-danger" })
+             </div>
+        </div>
+    }
+</div>
+
+
+
